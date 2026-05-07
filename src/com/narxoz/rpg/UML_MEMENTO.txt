@@ -1,0 +1,61 @@
+MEMENTO PATTERN UML DIAGRAM
+============================
+
+ORIGINATOR (com.narxoz.rpg.combatant):
+-------------------------------------
++------------------+
+|      Hero        |
++------------------+
+| - name: String   |
+| - hp: int        |
+| - mana: int      |
+| - gold: int      |
+| - maxHp: int     |
+| - attackPower: int|
+| - defense: int   |
+| - inventory      |
++------------------+
+| + createMemento(): HeroMemento |
+| + restoreFromMemento(m: HeroMemento): void |
++------------------+
+         |
+         | creates/restores
+         ▼
++------------------+
+|   HeroMemento    |
++------------------+
+| - name: String   |
+| - hp: int        |
+| - mana: int      |
+| - gold: int      |
+| - maxHp: int     |
+| - attackPower: int|
+| - defense: int   |
+| - inventoryShapshot |
++------------------+
+| (package-private getters) |
++------------------+
+
+         | stored by
+         ▼
+
+CARETAKER (com.narxoz.rpg.memento):
+-----------------------------------
++------------------+
+|   Caretaker      |
++------------------+
+| - history: Stack<HeroMemento> |
++------------------+
+| + save(m: HeroMemento): void |
+| + undo(): HeroMemento |
+| + peek(): HeroMemento |
+| + size(): int      |
++------------------+
+
+CLIENT (ChronomancerEngine):
+---------------------------
++------------------+
+|ChronomancerEngine|
++------------------+
+| + runVault()     |
++------------------+

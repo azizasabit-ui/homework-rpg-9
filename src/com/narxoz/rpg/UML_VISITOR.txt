@@ -1,0 +1,45 @@
+VISITOR PATTERN UML DIAGRAM
+============================
+
+                    +-------------------+
+                    | ArtifactVisitor   | (interface)
+                    +-------------------+
+                    | + visit(Weapon)   |
+                    | + visit(Potion)   |
+                    | + visit(Scroll)   |
+                    | + visit(Ring)     |
+                    | + visit(Armor)    |
+                    +-------------------+
+                           ▲
+                           |
+         ┌─────────────────┼─────────────────┬─────────────────┐
+         │                 │                 │                 │
++------------------+ +------------------+ +------------------+ +------------------+
+|  GoldAppraiser   | |EnchantmentScanner| |  CurseDetector   | | WeightCalculator |
++------------------+ +------------------+ +------------------+ +------------------+
+| - totalValue     | | - enchantCount   | | - curseCount     | | - totalWeight    |
++------------------+ +------------------+ +------------------+ +------------------+
+
+ELEMENT HIERARCHY:
+-----------------
+                    +-------------------+
+                    |     Artifact      | (abstract)
+                    +-------------------+
+                    | + getName()       |
+                    | + getValue()      |
+                    | + getWeight()     |
+                    | + accept(Visitor) | (abstract)
+                    +-------------------+
+                           ▲
+                           |
+         ┌─────────────────┼─────────────────┬─────────────────┐
+         │                 │                 │                 │
++------------------+ +------------------+ +------------------+ +------------------+ +------------------+
+|     Weapon       | |     Potion       | |     Scroll       | |      Ring        | |     Armor        |
++------------------+ +------------------+ +------------------+ +------------------+ +------------------+
+| - attackBonus    | | - healing        | | - spellName      | | - magicBonus     | | - defenseBonus   |
++------------------+ +------------------+ +------------------+ +------------------+ +------------------+
+| + accept(visitor)| | + accept(visitor)| | + accept(visitor)| | + accept(visitor)| | + accept(visitor)|
+|   visitor.visit  | |   visitor.visit  | |   visitor.visit  | |   visitor.visit  | |   visitor.visit  |
+|   (this)         | |   (this)         | |   (this)         | |   (this)         | |   (this)         |
++------------------+ +------------------+ +------------------+ +------------------+ +------------------+
